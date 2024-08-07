@@ -2,5 +2,5 @@
 
 public interface ICounteable
 {
-    public void CountAmount();
+    public int CountAmount();
 }

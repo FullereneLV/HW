@@ -12,3 +12,4 @@
 /home/ksenia/workspace/HW/HW6_StoreInventorySystem/StoreInventorySystem/obj/Debug/net8.0/StoreInventorySystem.pdb
 /home/ksenia/workspace/HW/HW6_StoreInventorySystem/StoreInventorySystem/obj/Debug/net8.0/StoreInventorySystem.genruntimeconfig.cache
 /home/ksenia/workspace/HW/HW6_StoreInventorySystem/StoreInventorySystem/obj/Debug/net8.0/ref/StoreInventorySystem.dll
+/home/ksenia/workspace/HW/HW6_StoreInventorySystem/StoreInventorySystem/obj/Debug/net8.0/StoreInventorySystem.sourcelink.json

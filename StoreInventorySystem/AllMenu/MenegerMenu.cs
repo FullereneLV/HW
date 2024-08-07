@@ -1,19 +1,14 @@
 ﻿using static System.Console;
+
 namespace StoreInventorySystem.AllMenu;
 
-public class MenegerMenu
+public class MenegerMenu : PatternMenu
 {
-    protected Store MySrote;
-    AddProductMenu addProductMenu;
-    RemoveProductMenu removeProductMenu;
-    ShowProduct showProduct;
-    public MenegerMenu(Store menu){
-        MySrote = menu;
-        addProductMenu = new AddProductMenu(menu);
-        removeProductMenu = new RemoveProductMenu(menu);
-        showProduct = new ShowProduct(menu);
+    public MenegerMenu(Store store):base(store)
+    {
     }
-    public void RunMenegerMenu()
+
+    public override void Run()
     {
         Clear();
         string prompt = " Welcome to Meneger Menu:";
@@ -24,16 +19,16 @@ public class MenegerMenu
         switch (selectedIndex)
         {
             case 0:
-            addProductMenu.AddMenu();
+                MyStore.MyAddProductMenu.Run();
                 break;
             case 1:
-            removeProductMenu.RemoveMenu();
+                MyStore.MyRemoveProductMenu.Run();
                 break;
             case 2:
-            showProduct.ShowProductMenu();
+                MyStore.MyShowProduct.Run();
                 break;
             case 3:
-                MySrote.loginMenu.Start();
+                MyStore.MyLoginMenu.Run();
                 break;
         }
     }

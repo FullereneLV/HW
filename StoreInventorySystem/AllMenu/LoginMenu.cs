@@ -1,23 +1,18 @@
 ﻿using static System.Console;
-using StoreInventorySystem.AllMenu;
+using StoreInventorySystem.Staff;
 
-namespace StoreInventorySystem;
+namespace StoreInventorySystem.AllMenu;
 
-public class LoginMenu
+public class LoginMenu : PatternMenu
 {
-    List<People> users = new List<People>();
-    MenegerMenu menegerMenu;
+    private List<People> _users = new();
 
-    public LoginMenu(Store store){
-        menegerMenu = new MenegerMenu(store);
-    }
-    
-    public void Start()
+    public LoginMenu(Store store) : base(store)
     {
-        RunLoginMenu();
     }
 
-    private void RunLoginMenu(){
+    public override void Run()
+    {
         Clear();
         WriteLine("Use the arrow key to cycle through options and press enter to select an option");
         string prompt = "Welcome to Store Inventory System.";
@@ -34,22 +29,24 @@ public class LoginMenu
                 LogIn();
                 break;
             case 2:
-                ExitApp();
+                ConsoleUtils.QuitConsole();
                 break;
         }
+        ConsoleUtils.WaitForKeyPress();
+        Run();
     }
 
-    private void SingUp(){
+    private void SingUp()
+    {
         Clear();
         WriteLine("Welcome to create account");
-        
         WriteLine("Enter email:");
         var email = ReadLine();
         WriteLine("Enter password");
         var password = ReadLine();
-        if (users.Exists(u => u.Email == email))
+        if (_users.Exists(u => u.Email == email))
         {
-           ForegroundColor = ConsoleColor.Red;
+            ForegroundColor = ConsoleColor.Red;
             WriteLine("Username already exists. Please try logging in.");
             ResetColor();
         }
@@ -57,52 +54,38 @@ public class LoginMenu
         {
             WriteLine("Enter Name:");
             var name = ReadLine();
-            WriteLine();
-
-            users.Add(new People(name, email, password));
+            _users.Add(new People(name, email, password));
             ForegroundColor = ConsoleColor.Green;
             WriteLine("User registered successfully.");
             ResetColor();
-            ConsoleUtils.WaitForKeyPress();
-            RunLoginMenu();
         }
-        WriteLine("Press any key to exit ...");
-        ReadKey(true);
-        RunLoginMenu();
     }
 
-    private void LogIn(){
+    private void LogIn()
+    {
         Clear();
         ForegroundColor = ConsoleColor.Green;
         WriteLine("Welcome to Log In:");
         ResetColor();
         WriteLine("Enter email:");
-        var email =ReadLine();
+        var email = ReadLine();
         WriteLine("Enter password");
         var password = ReadLine();
 
-        var user = users.Find(u => u.Email == email && u.Password == password);
+        var user = _users.Find(u => u.Email == email && u.Password == password);
         if (user != null)
         {
             ForegroundColor = ConsoleColor.Green;
             WriteLine("Login successful!");
             ResetColor();
             ConsoleUtils.WaitForKeyPress();
-            menegerMenu.RunMenegerMenu();
+            MyStore.MyMenegerMenu.Run();
         }
         else
         {
-           ForegroundColor = ConsoleColor.Red;
+            ForegroundColor = ConsoleColor.Red;
             WriteLine("Invalid credentials. Please try again.");
             ResetColor();
-            ConsoleUtils.WaitForKeyPress();
-            RunLoginMenu();
         }
-    }
-    
-    private void ExitApp(){
-        WriteLine("Press any key to exit ...");
-        ReadKey(true);
-        Environment.Exit(0);
     }
 }
