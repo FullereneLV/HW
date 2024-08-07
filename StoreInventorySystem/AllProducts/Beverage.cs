@@ -1,6 +1,4 @@
-﻿using static System.Console;
-
-namespace StoreInventorySystem;
+﻿namespace StoreInventorySystem.AllProducts;
 
 public class Beverage : AbstractProducts, ICounteable
 {
@@ -12,9 +10,9 @@ public class Beverage : AbstractProducts, ICounteable
     {
     }
 
-    public void CountAmount()
+    public int CountAmount()
     {
-        WriteLine(Quantity);
+        return Quantity;
     }
 
 }
